@@ -2,7 +2,7 @@ Package: inventory
 Type: Package
 Title: Computation of Optimal Inventory Reorder Points
 Version: 0.1.0
-Authors@R: person(c('Dennis', 'L.'), 'Malandro',
+Authors@R: person('Dennis', 'Malandro',
     email = 'dennismalandro@gmail.com', role = c('aut', 'cre'))
 Description: Fit nonparametric density estimates to lead-time and
     demand data.  Integrate those "conditonal" densities to get a
@@ -12,7 +12,7 @@ Description: Fit nonparametric density estimates to lead-time and
 License: GPL-2 | GPL-3
 Encoding: UTF-8
 LazyData: true
-Imports:
+Depends:
     ash,
     tidyverse
 Suggests: 

@@ -1,4 +1,3 @@
-library(purrr)
 
 kde <- function(x, bw = 'bcv', ...)
   density(x, bw = bw, ...) %>%
