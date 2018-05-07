@@ -22,13 +22,12 @@ ash <- function(x, m = 15, nbin = 180, beta = 0.2)
 
 # Reference Wand, Jones for end effects picture
 
-#' Calculate density (safely) of a numeric vector.
+#' Calculate the nonparametric density (safely) of a numeric vector.
 #'
 #' @param x numeric vector
 #' @param type the type of density estimator (kde or ash)
 #' @param trans transfrom to be applied to \code{x} before estimation (sqrt, log, none, reflect)
 #' @return a density as a tibble of \code{x}, \code{y} pairs
-#' @export
 safely_densify <- safely(
   function(x,
     type = c('ash', 'kde'),
@@ -70,8 +69,53 @@ safely_densify <- safely(
 
     dns})
 
-#) %>%
-      # filter(lead(x, default = Inf) - x > 0)})
+#' Calculate the nonparametric density of a numeric vector.
+#'
+#' @param x numeric vector
+#' @param type the type of density estimator (kde or ash)
+#' @param trans transfrom to be applied to \code{x} before estimation (sqrt, log, none, reflect)
+#' @return a density as a tibble of \code{x}, \code{y} pairs
+#' @export
+densify <- function(x,
+    type = c('ash', 'kde'),
+    trans = c('sqrt', 'log', 'none', 'reflect'),
+    ...) {
+
+    type <- match.arg(type)
+    trans <- match.arg(trans)
+
+    if(trans == 'reflect') x <- c(x, -x)
+    if(trans == 'log') x <- log(x)
+    if(trans == 'sqrt') x <- sqrt(x)
+
+    dots <- list(...)
+    dots$x <- x
+    if(trans == 'reflect') dots$n <- 2 * 512
+
+    dns <- switch(type,
+     'ash' = do.call('ash', dots),
+     'kde' = do.call('kde', dots))
+
+
+    if(trans == 'reflect')
+      dns <- dns %>%
+        filter(x >= 0) %>%
+        mutate(y = 2 * y)
+
+    if(trans == 'log')
+      dns <- dns %>%
+        mutate(
+          x = exp(x),
+          y = y / x)
+
+    if(trans == 'sqrt')
+      dns <- dns %>%
+         mutate(
+           x = x^2,
+           y = y / (2 * sqrt(x)))
+
+    dns}
+
 
 
 # Not sure what I was thinking here

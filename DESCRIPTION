@@ -1,19 +1,22 @@
 Package: inventory
 Type: Package
-Title: Computation of Optimal Inventory Reorder Points
-Version: 0.1.0
+Title: Computation of Optimal Reorder Points
+Version: 0.2.0
 Authors@R: person('Dennis', 'Malandro',
     email = 'dennismalandro@gmail.com', role = c('aut', 'cre'))
-Description: Fit nonparametric density estimates to lead-time and
-    demand data.  Integrate those "conditonal" densities to get a
-    the marginal lead-time demand distribution.  This in turn is 
-    integrated to get the optimal reorder point, for a given
-    service level.
+Description: Fit lead-time and demand-rate nonparametric density
+    estimates.  Integrate conditonal lead-time density over
+    demand-rate density to get the marginal lead-time demand
+    distribution.  Integrate this in turn to get the 
+    reorder-point/service-level relationship.
 License: GPL-2 | GPL-3
 Encoding: UTF-8
 LazyData: true
 Depends:
     ash,
+    broom,
+    lubridate,
+    rlang,
     tidyverse
 Suggests: 
     knitr,

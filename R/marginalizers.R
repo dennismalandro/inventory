@@ -15,7 +15,6 @@ aggregate_pdfs <- function(pdfs, probs) {
     vapply(pdfs, function(f) f(x), numeric(n)) %*%
       probs %>% as.vector()}}
 
-
 #' Integrate (marginal) pdf to get cdf (as a function)
 #' @param pdf marginal pdf to be integrated
 #' @export
@@ -28,7 +27,6 @@ integrate_pdf <- function(pdf) {
           stop.on.error = FALSE)$value,
       numeric(1))}}
 
-
 # Integrate (marginal) pdf to get cdf (as a function)
 #
 # @param pdf pdf to be integrated
@@ -38,7 +36,6 @@ integrate_pdf2 <- function(pdf) {
       ~integrate(pdf, lower = 0, upper = .,
         subdivisions = 999L,
         stop.on.error = FALSE)$value)}}
-
 
 #' Return reorder-point function by inverting cdf
 #' @param cdf Marginal lead-time demand cdf, as a _function_
