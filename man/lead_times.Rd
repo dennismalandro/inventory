@@ -2,7 +2,7 @@
 % Please edit documentation in R/util.R
 \name{lead_times}
 \alias{lead_times}
-\title{Calculate lead times from work-order dates and completed dates}
+\title{Compute lead times from work-order dates and completed dates}
 \usage{
 lead_times(.data, start, end)
 }
@@ -12,12 +12,10 @@ lead_times(.data, start, end)
 \item{start}{Date, start of lead time}
 
 \item{end}{Date, end of lead time}
-
-\item{item}{Item id}
 }
 \value{
 .data with lead-time column appended
 }
 \description{
-Calculate lead times from work-order dates and completed dates
+Compute lead times from work-order dates and completed dates
 }

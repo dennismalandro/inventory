@@ -1,7 +1,7 @@
 Package: inventory
 Type: Package
 Title: Computation of Optimal Reorder Points
-Version: 0.2.0
+Version: 0.2.1
 Authors@R: person('Dennis', 'Malandro',
     email = 'dennismalandro@gmail.com', role = c('aut', 'cre'))
 Description: Fit lead-time and demand-rate nonparametric density

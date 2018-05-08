@@ -2,14 +2,12 @@
 % Please edit documentation in R/util.R
 \name{demand_rates}
 \alias{demand_rates}
-\title{Calculate demand rates from demand epochs and quantities}
+\title{Compute demand rates from demand epochs and quantities}
 \usage{
-demand_rates(.data, item, date, qty)
+demand_rates(.data, date, qty)
 }
 \arguments{
 \item{.data}{A tibble containing (at least) the following dates and quantities}
-
-\item{item}{item id}
 
 \item{date}{Epoch at which an order is placed}
 
@@ -19,5 +17,5 @@ demand_rates(.data, item, date, qty)
 A tibble of demand rates by item
 }
 \description{
-Calculate demand rates from demand epochs and quantities
+Compute demand rates from demand epochs and quantities
 }
