@@ -4,7 +4,7 @@
 \alias{lead_times}
 \title{Compute lead times from work-order dates and completed dates}
 \usage{
-lead_times(.data, start, end)
+lead_times(.data, start, end, name = "Lead Time")
 }
 \arguments{
 \item{.data}{A tibble containing (at least) dates for work order placement and completion}
@@ -12,6 +12,8 @@ lead_times(.data, start, end)
 \item{start}{Date, start of lead time}
 
 \item{end}{Date, end of lead time}
+
+\item{name}{String, name of returned lead-time column}
 }
 \value{
 .data with lead-time column appended
