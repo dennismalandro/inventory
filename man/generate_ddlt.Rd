@@ -4,17 +4,17 @@
 \alias{generate_ddlt}
 \title{Generate demand-during-lead-time distribution}
 \usage{
-generate_ddlt(lead_times, demand_freq, cycles = 999)
+generate_ddlt(lead_times, dmd_freq_tbl, cycles = 999)
 }
 \arguments{
 \item{lead_times}{A numeric vector of lead times in days}
 
-\item{demand_freq}{A frequency tibble of daily demands (normally gotten as output from tableize_demand()`)}
+\item{dmd_freq_tbl}{A frequency tibble of daily demands (normally gotten as output from tableize_demand()`)}
 
 \item{cycles}{Number of 'saw tooth' inventory replenishment cycles to simulate}
 }
 \value{
-A numeric vector of demands during lead time, of length `cycles`
+Numeric vector of demand during lead time, of length `cycles`
 }
 \description{
 Generate demand-during-lead-time distribution

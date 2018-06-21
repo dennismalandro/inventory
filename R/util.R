@@ -24,32 +24,35 @@ tableize_demand <- function(.data, date, qty) {
 
   nzeros <- date_range - n_dates
 
-  .data %>%
+ .data %>%
     group_by(!!date) %>%
     summarize(!!qty_name := sum(!!qty)) %>%
     arrange(!!date) %>%
     count(!!qty) %>%
-    add_row(!!qty_name := 0, n = nzeros, .before = 1)}
+    add_row(!!qty_name := 0, n = nzeros, .before = 1) %>%
+  rename(freq = n)}
 
 
 #' Generate demand-during-lead-time distribution
 #'
 #' @param lead_times A numeric vector of lead times in days
-#' @param demand_freq A frequency tibble of daily demands (normally gotten as output from tableize_demand()`)
+#' @param dmd_freq_tbl A frequency tibble of daily demands (normally gotten as output from tableize_demand()`)
 #' @param cycles Number of 'saw tooth' inventory replenishment cycles to simulate
-#' @return A numeric vector of demands during lead time, of length `cycles`
+#' @return Numeric vector of demand during lead time, of length `cycles`
 #' @export
 generate_ddlt <- function(
-  lead_times, demand_freq, cycles = 999) {
-  # lt_vector - vector of lead times
-  # dmd_tbl - table of order quantities and weights
-  # qty <- enexpr(qty)
+  lead_times, dmd_freq_tbl, cycles = 999) {
+  # lead_times - vector of lead times
+  # dmd_freq_tbl - table of order quantities and weights
 
   rerun(cycles, {
     lt <- sample(lead_times, size = 1)
-    demand_freq %>%
-      sample_n(weight=n, size = round(lt), replace = T) %>%
-      pull(-n) %>%
+    dmd_freq_tbl %>%
+      sample_n(
+        weight = freq,
+        size = round(lt),
+        replace = TRUE) %>%
+      pull(-freq) %>%
       sum()}) %>%
     unlist()}
 
