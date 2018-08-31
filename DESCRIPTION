@@ -1,7 +1,7 @@
 Package: inventory
 Type: Package
 Title: Computation of Optimal Reorder Points
-Version: 0.3.1
+Version: 0.3.1.9000
 Authors@R: person('Dennis', 'Malandro',
     email = 'dennismalandro@gmail.com', role = c('aut', 'cre'))
 Description: Fit lead-time and demand-rate nonparametric density
@@ -22,5 +22,5 @@ Suggests:
     knitr,
     rmarkdown
 URL: https://github.com/dennismalandro/inventory
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.0
 VignetteBuilder: knitr

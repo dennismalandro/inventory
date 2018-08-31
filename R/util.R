@@ -32,6 +32,31 @@ tableize_demand <- function(.data, date, qty) {
     add_row(!!qty_name := 0, n = nzeros, .before = 1) %>%
   rename(freq = n)}
 
+#' Compute daily demand distribution
+#'
+#' @param .data A tibble containing (at least) the following dates and quantities
+#' @param date_range Overall date range spanned by the union of all `Item Numbers` in the data set`
+#' @param date Quoted column name within `.data` referring to the Date on which demand is to be met (and hence, inventory consumed)
+#' @param qty Quoted column name within `.data` referring to the quantity orded (_i.e._, _demanded_)
+#' @return A frequency tibble of daily demand
+#' @export
+tableize_demand2 <- function (.data, date_range, order_date, qty)
+{
+  date <- enexpr(order_date)
+  qty <- enexpr(qty)
+  qty_name <- expr_name(qty)
+
+  n_dates <- .data %>% pull(!!date) %>% n_distinct()
+  nzeros <- unique(date_range) - n_dates
+
+  .data %>% group_by(!!date) %>%
+    summarize(!!qty_name := sum(!!qty)) %>%
+    arrange(!!date) %>%
+    count(!!qty) %>%
+    add_row(!!qty_name := 0, n = nzeros, .before = 1) %>%
+    rename(freq = n)
+}
+
 
 #' Generate demand-during-lead-time distribution
 #'
